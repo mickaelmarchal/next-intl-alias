@@ -1,0 +1,58 @@
+{
+  "name": "@mickaelmarchal/next-intl-alias",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "description": "Addition to NextIntl to provide aliases to locales.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mickaelmarchal/next-intl-alias"
+  },
+  "scripts": {
+    "build": "rm -rf dist && rollup -c",
+    "lint": "pnpm run lint:source && pnpm run lint:package",
+    "lint:source": "eslint src test && tsc --noEmit",
+    "lint:package": "publint && attw --pack",
+    "prepublishOnly": "CI=true turbo test && turbo lint && turbo build && cp ../../README.md .",
+    "postpublish": "git checkout . && rm ./README.md"
+  },
+  "main": "./dist/index.react-client.js",
+  "module": "./dist/esm/index.react-client.js",
+  "typings": "./dist/types/src/index.react-client.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/src/index.react-client.d.ts",
+      "react-server": "./dist/esm/index.react-server.js",
+      "default": "./dist/index.react-client.js"
+    },
+    "./server": {
+      "types": "./server.d.ts",
+      "react-server": "./dist/esm/server.react-server.js",
+      "default": "./dist/server.react-client.js"
+    }
+  },
+  "files": [
+    "dist",
+    "server.d.ts"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "use-intl": "^3.12.2",
+    "next": "^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@edge-runtime/vm": "^3.1.3",
+    "@types/node": "^20.1.2",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.54.0",
+    "eslint-config-molindo": "^7.0.0",
+    "eslint-plugin-deprecation": "^1.4.1",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "rollup": "^3.28.1",
+    "rollup-plugin-preserve-directives": "0.2.0",
+    "typescript": "^5.2.2"
+  }
+}
